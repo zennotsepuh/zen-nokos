@@ -1,0 +1,1396 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="theme-color" content="#09090b">
+<title>ZEN NOKOS — Nomor Virtual</title>
+
+<style>
+*{
+  box-sizing:border-box;
+  margin:0;
+  padding:0;
+}
+
+:root{
+  --bg:#070709;
+  --card:#111116;
+  --card2:#17171e;
+  --border:#27272f;
+  --text:#fff;
+  --muted:#9999a5;
+  --red:#ff1744;
+  --red2:#ff4d6d;
+  --green:#22c55e;
+}
+
+body{
+  background:
+    radial-gradient(circle at 50% -10%,rgba(255,23,68,.18),transparent 35%),
+    var(--bg);
+  color:var(--text);
+  font-family:Arial,Helvetica,sans-serif;
+  min-height:100vh;
+}
+
+button,input,select{
+  font:inherit;
+}
+
+button{
+  cursor:pointer;
+}
+
+.container{
+  width:min(1150px,calc(100% - 30px));
+  margin:auto;
+}
+
+/* HEADER */
+
+header{
+  position:sticky;
+  top:0;
+  z-index:50;
+  backdrop-filter:blur(15px);
+  background:rgba(7,7,9,.8);
+  border-bottom:1px solid rgba(255,255,255,.06);
+}
+
+.nav{
+  height:70px;
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+}
+
+.logo{
+  display:flex;
+  align-items:center;
+  gap:10px;
+  font-weight:900;
+  font-size:21px;
+}
+
+.logo-icon{
+  width:38px;
+  height:38px;
+  border-radius:12px;
+  display:grid;
+  place-items:center;
+  background:linear-gradient(135deg,var(--red),#8b001f);
+  box-shadow:0 0 25px rgba(255,23,68,.3);
+}
+
+.cart-btn{
+  position:relative;
+  border:1px solid var(--border);
+  background:var(--card);
+  color:white;
+  padding:11px 15px;
+  border-radius:12px;
+}
+
+.cart-count{
+  position:absolute;
+  top:-7px;
+  right:-7px;
+  background:var(--red);
+  width:21px;
+  height:21px;
+  display:grid;
+  place-items:center;
+  border-radius:50%;
+  font-size:11px;
+  font-weight:bold;
+}
+
+/* HERO */
+
+.hero{
+  text-align:center;
+  padding:75px 0 45px;
+}
+
+.badge{
+  display:inline-block;
+  padding:7px 13px;
+  border:1px solid rgba(255,23,68,.3);
+  background:rgba(255,23,68,.08);
+  border-radius:30px;
+  color:#ff6b87;
+  font-size:13px;
+  margin-bottom:18px;
+}
+
+.hero h1{
+  font-size:clamp(38px,7vw,72px);
+  line-height:1;
+  font-weight:1000;
+  letter-spacing:-3px;
+}
+
+.hero h1 span{
+  color:var(--red);
+}
+
+.hero p{
+  max-width:600px;
+  margin:18px auto 0;
+  color:var(--muted);
+  line-height:1.7;
+}
+
+/* SEARCH */
+
+.tools{
+  display:flex;
+  gap:12px;
+  margin-bottom:25px;
+}
+
+.search{
+  flex:1;
+  position:relative;
+}
+
+.search input{
+  width:100%;
+  background:var(--card);
+  border:1px solid var(--border);
+  color:white;
+  padding:15px 17px 15px 45px;
+  border-radius:13px;
+  outline:none;
+}
+
+.search input:focus{
+  border-color:var(--red);
+}
+
+.search span{
+  position:absolute;
+  left:16px;
+  top:14px;
+  color:#777;
+}
+
+select{
+  background:var(--card);
+  color:white;
+  border:1px solid var(--border);
+  border-radius:13px;
+  padding:0 15px;
+  outline:none;
+}
+
+/* PRODUCTS */
+
+.section-title{
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  margin-bottom:18px;
+}
+
+.section-title h2{
+  font-size:22px;
+}
+
+.section-title span{
+  color:#777;
+  font-size:13px;
+}
+
+.grid{
+  display:grid;
+  grid-template-columns:repeat(4,1fr);
+  gap:15px;
+}
+
+.product{
+  background:linear-gradient(145deg,#15151b,#0e0e12);
+  border:1px solid var(--border);
+  border-radius:18px;
+  padding:17px;
+  transition:.2s;
+}
+
+.product:hover{
+  transform:translateY(-3px);
+  border-color:#454550;
+}
+
+.flag{
+  width:54px;
+  height:54px;
+  border-radius:15px;
+  background:#1d1d25;
+  display:grid;
+  place-items:center;
+  font-size:29px;
+  margin-bottom:15px;
+}
+
+.product h3{
+  font-size:17px;
+  margin-bottom:6px;
+}
+
+.product .service{
+  color:#888;
+  font-size:13px;
+}
+
+.stock{
+  display:flex;
+  align-items:center;
+  gap:6px;
+  color:#63e68c;
+  font-size:12px;
+  margin:14px 0;
+}
+
+.dot{
+  width:7px;
+  height:7px;
+  border-radius:50%;
+  background:var(--green);
+  box-shadow:0 0 8px var(--green);
+}
+
+.bottom{
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  gap:8px;
+}
+
+.price{
+  font-weight:900;
+  color:white;
+}
+
+.price small{
+  display:block;
+  color:#777;
+  font-weight:normal;
+  font-size:11px;
+  margin-bottom:2px;
+}
+
+.add{
+  border:0;
+  background:var(--red);
+  color:white;
+  padding:10px 12px;
+  border-radius:10px;
+  font-weight:bold;
+}
+
+.add:hover{
+  background:var(--red2);
+}
+
+/* EMPTY */
+
+.empty{
+  display:none;
+  text-align:center;
+  padding:60px 20px;
+  color:#777;
+}
+
+/* MODAL */
+
+.overlay{
+  position:fixed;
+  inset:0;
+  background:rgba(0,0,0,.7);
+  backdrop-filter:blur(5px);
+  z-index:100;
+  display:none;
+  align-items:center;
+  justify-content:center;
+  padding:15px;
+}
+
+.overlay.active{
+  display:flex;
+}
+
+.modal{
+  width:min(520px,100%);
+  max-height:90vh;
+  overflow:auto;
+  background:#111116;
+  border:1px solid #292932;
+  border-radius:20px;
+  padding:22px;
+  box-shadow:0 20px 80px rgba(0,0,0,.6);
+}
+
+.modal-head{
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  margin-bottom:20px;
+}
+
+.close{
+  width:35px;
+  height:35px;
+  border:0;
+  border-radius:10px;
+  background:#202027;
+  color:white;
+  font-size:20px;
+}
+
+.cart-item{
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  gap:10px;
+  padding:14px 0;
+  border-bottom:1px solid #25252c;
+}
+
+.cart-item-info{
+  flex:1;
+}
+
+.cart-item-info strong{
+  display:block;
+  margin-bottom:4px;
+}
+
+.cart-item-info small{
+  color:#888;
+}
+
+.remove{
+  background:#2b1116;
+  color:#ff6b87;
+  border:0;
+  padding:8px 10px;
+  border-radius:8px;
+}
+
+.total{
+  display:flex;
+  justify-content:space-between;
+  padding:20px 0;
+  font-size:19px;
+  font-weight:bold;
+}
+
+.checkout{
+  width:100%;
+  border:0;
+  background:#20c463;
+  color:white;
+  padding:15px;
+  border-radius:12px;
+  font-weight:bold;
+}
+
+.checkout:hover{
+  background:#25db70;
+}
+
+.note{
+  color:#777;
+  font-size:11px;
+  line-height:1.5;
+  text-align:center;
+  margin-top:12px;
+}
+
+/* FOOTER */
+
+footer{
+  text-align:center;
+  color:#666;
+  font-size:12px;
+  padding:60px 0 30px;
+}
+
+/* RESPONSIVE */
+
+@media(max-width:900px){
+  .grid{
+    grid-template-columns:repeat(3,1fr);
+  }
+}
+
+@media(max-width:650px){
+  .grid{
+    grid-template-columns:repeat(2,1fr);
+  }
+
+  .tools{
+    flex-direction:column;
+  }
+
+  select{
+    height:48px;
+  }
+
+  .hero{
+    padding-top:55px;
+  }
+}
+
+@media(max-width:430px){
+  .grid{
+    grid-template-columns:1fr;
+  }
+
+  .hero h1{
+    letter-spacing:-2px;
+  }
+}
+</style>
+</head>
+
+<body>
+
+<header>
+  <div class="container nav">
+
+    <div class="logo">
+      <div class="logo-icon">Z</div>
+      <span>ZEN NOKOS</span>
+    </div>
+
+    <button class="cart-btn" onclick="openCart()">
+      🛒 Keranjang
+      <span class="cart-count" id="cartCount">0</span>
+    </button>
+
+  </div>
+</header>
+
+
+<main>
+
+<section class="hero container">
+
+  <div class="badge">⚡ NOMOR VIRTUAL ONLINE</div>
+
+  <h1>
+    BELI <span>NOKOS</span><br>
+    DENGAN MUDAH
+  </h1>
+
+  <p>
+    Pilih negara dan layanan yang tersedia,
+    masukkan ke keranjang, lalu lakukan order
+    langsung melalui WhatsApp.
+  </p>
+
+</section>
+
+
+<section class="container">
+
+  <div class="tools">
+
+    <div class="search">
+      <span>🔎</span>
+      <input
+        id="search"
+        type="text"
+        placeholder="Cari negara atau layanan..."
+        oninput="renderProducts()"
+      >
+    </div>
+
+    <select id="countryFilter" onchange="renderProducts()">
+      <option value="all">Semua Negara</option>
+    </select>
+
+  </div>
+
+
+  <div class="section-title">
+    <h2>Nomor Tersedia</h2>
+    <span id="productTotal">0 produk</span>
+  </div>
+
+
+  <div class="grid" id="products"></div>
+
+  <div class="empty" id="empty">
+    😕 Produk tidak ditemukan.
+  </div>
+
+</section>
+
+</main>
+
+
+<footer>
+  © 2026 ZEN NOKOS — SUPPORT BY CHARLES
+</footer>
+
+
+<!-- CART MODAL -->
+
+<div class="overlay" id="cartOverlay">
+
+  <div class="modal">
+
+    <div class="modal-head">
+      <h2>🛒 Keranjang</h2>
+      <button class="close" onclick="closeCart()">×</button>
+    </div>
+
+    <div id="cartItems"></div>
+
+    <div class="total">
+      <span>Total</span>
+      <span id="totalPrice">Rp0</span>
+    </div>
+
+    <button class="checkout" onclick="checkout()">
+      💬 ORDER VIA WHATSAPP YA SAYANG
+    </button>
+
+    <div class="note">
+      Dengan melakukan order, pastikan data pesanan sudah benar.
+    </div>
+
+  </div>
+
+</div>
+
+
+<script>
+
+/*
+====================================================
+ DATA PRODUK
+====================================================
+
+Ganti data di bawah sesuai stok dan harga lu.
+
+price = harga dalam rupiah
+stock = jumlah stok yang ditampilkan
+country = negara
+service = layanan
+*/
+
+const PRODUCTS = [
+
+  {
+    id:1,
+    country:"Indonesia",
+    code:"ID",
+    flag:"🇮🇩",
+    service:"WhatsApp",
+    price:7000,
+    stock:25
+  },
+
+  {
+    id:2,
+    country:"Malaysia",
+    code:"MY",
+    flag:"🇲🇾",
+    service:"WhatsApp",
+    price:10000,
+    stock:15
+  },
+
+  {
+    id:3,
+    country:"Singapore",
+    code:"SG",
+    flag:"🇸🇬",
+    service:"WhatsApp",
+    price:15000,
+    stock:8
+  },
+
+  {
+    id:4,
+    country:"Thailand",
+    code:"TH",
+    flag:"🇹🇭",
+    service:"WhatsApp",
+    price:25000,
+    stock:14
+  },
+
+  {
+    id:5,
+    country:"Philippines",
+    code:"PH",
+    flag:"🇵🇭",
+    service:"WhatsApp",
+    price:10000,
+    stock:11
+  },
+
+  {
+    id:6,
+    country:"Vietnam",
+    code:"VN",
+    flag:"🇻🇳",
+    service:"WhatsApp",
+    price:10000,
+    stock:13
+  },
+
+  {
+    id:7,
+    country:"India",
+    code:"IN",
+    flag:"🇮🇳",
+    service:"WhatsApp",
+    price:25000,
+    stock:20
+  },
+
+  {
+    id:8,
+    country:"United States",
+    code:"US",
+    flag:"🇺🇸",
+    service:"WhatsApp",
+    price:30000,
+    stock:12
+  },
+
+  {
+    id:9,
+    country:"Canada",
+    code:"CA",
+    flag:"🇨🇦",
+    service:"WhatsApp",
+    price:30000,
+    stock:9
+  },
+
+  {
+    id:10,
+    country:"United Kingdom",
+    code:"GB",
+    flag:"🇬🇧",
+    service:"WhatsApp",
+    price:30000,
+    stock:10
+  },
+
+  {
+    id:11,
+    country:"Australia",
+    code:"AU",
+    flag:"🇦🇺",
+    service:"WhatsApp",
+    price:30000,
+    stock:7
+  },
+
+  {
+    id:12,
+    country:"Germany",
+    code:"DE",
+    flag:"🇩🇪",
+    service:"WhatsApp",
+    price:20000,
+    stock:10
+  },
+
+  {
+    id:13,
+    country:"France",
+    code:"FR",
+    flag:"🇫🇷",
+    service:"WhatsApp",
+    price:20000,
+    stock:8
+  },
+
+  {
+    id:14,
+    country:"Italy",
+    code:"IT",
+    flag:"🇮🇹",
+    service:"WhatsApp",
+    price:25000,
+    stock:9
+  },
+
+  {
+    id:15,
+    country:"Spain",
+    code:"ES",
+    flag:"🇪🇸",
+    service:"WhatsApp",
+    price:25000,
+    stock:8
+  },
+
+  {
+    id:16,
+    country:"Netherlands",
+    code:"NL",
+    flag:"🇳🇱",
+    service:"WhatsApp",
+    price:27000,
+    stock:6
+  },
+
+  {
+    id:17,
+    country:"Belgium",
+    code:"BE",
+    flag:"🇧🇪",
+    service:"WhatsApp",
+    price:27000,
+    stock:6
+  },
+
+  {
+    id:18,
+    country:"Brazil",
+    code:"BR",
+    flag:"🇧🇷",
+    service:"WhatsApp",
+    price:30000,
+    stock:7
+  },
+
+  {
+    id:19,
+    country:"Mexico",
+    code:"MX",
+    flag:"🇲🇽",
+    service:"WhatsApp",
+    price:30000,
+    stock:9
+  },
+
+  {
+    id:20,
+    country:"Argentina",
+    code:"AR",
+    flag:"🇦🇷",
+    service:"WhatsApp",
+    price:30000,
+    stock:7
+  },
+
+  {
+    id:21,
+    country:"Turkey",
+    code:"TR",
+    flag:"🇹🇷",
+    service:"WhatsApp",
+    price:30000,
+    stock:10
+  },
+
+  {
+    id:22,
+    country:"Saudi Arabia",
+    code:"SA",
+    flag:"🇸🇦",
+    service:"WhatsApp",
+    price:30000,
+    stock:8
+  },
+
+  {
+    id:23,
+    country:"United Arab Emirates",
+    code:"AE",
+    flag:"🇦🇪",
+    service:"WhatsApp",
+    price:30000,
+    stock:6
+  },
+
+  {
+    id:24,
+    country:"South Africa",
+    code:"ZA",
+    flag:"🇿🇦",
+    service:"WhatsApp",
+    price:20000,
+    stock:8
+  },
+
+  {
+    id:25,
+    country:"Egypt",
+    code:"EG",
+    flag:"🇪🇬",
+    service:"WhatsApp",
+    price:20000,
+    stock:10
+  },
+
+  {
+    id:26,
+    country:"Japan",
+    code:"JP",
+    flag:"🇯🇵",
+    service:"WhatsApp",
+    price:35000,
+    stock:6
+  },
+
+  {
+    id:27,
+    country:"South Korea",
+    code:"KR",
+    flag:"🇰🇷",
+    service:"WhatsApp",
+    price:35000,
+    stock:5
+  },
+
+  {
+    id:28,
+    country:"China",
+    code:"CN",
+    flag:"🇨🇳",
+    service:"WhatsApp",
+    price:35000,
+    stock:5
+  },
+
+  {
+    id:29,
+    country:"Hong Kong",
+    code:"HK",
+    flag:"🇭🇰",
+    service:"WhatsApp",
+    price:35000,
+    stock:6
+  },
+
+  {
+    id:30,
+    country:"Taiwan",
+    code:"TW",
+    flag:"🇹🇼",
+    service:"WhatsApp",
+    price:25000,
+    stock:7
+  },
+
+  {
+    id:31,
+    country:"Russia",
+    code:"RU",
+    flag:"🇷🇺",
+    service:"WhatsApp",
+    price:50000,
+    stock:8
+  },
+
+  {
+    id:32,
+    country:"Ukraine",
+    code:"UA",
+    flag:"🇺🇦",
+    service:"WhatsApp",
+    price:21000,
+    stock:7
+  },
+
+  {
+    id:33,
+    country:"Poland",
+    code:"PL",
+    flag:"🇵🇱",
+    service:"WhatsApp",
+    price:23000,
+    stock:8
+  },
+
+  {
+    id:34,
+    country:"Sweden",
+    code:"SE",
+    flag:"🇸🇪",
+    service:"WhatsApp",
+    price:28000,
+    stock:5
+  },
+
+  {
+    id:35,
+    country:"Norway",
+    code:"NO",
+    flag:"🇳🇴",
+    service:"WhatsApp",
+    price:29000,
+    stock:5
+  },
+
+  {
+    id:36,
+    country:"Switzerland",
+    code:"CH",
+    flag:"🇨🇭",
+    service:"WhatsApp",
+    price:30000,
+    stock:5
+  },
+
+  {
+    id:37,
+    country:"New Zealand",
+    code:"NZ",
+    flag:"🇳🇿",
+    service:"WhatsApp",
+    price:29000,
+    stock:5
+  },
+
+  {
+    id:38,
+    country:"Pakistan",
+    code:"PK",
+    flag:"🇵🇰",
+    service:"WhatsApp",
+    price:15000,
+    stock:12
+  },
+
+  {
+    id:39,
+    country:"Bangladesh",
+    code:"BD",
+    flag:"🇧🇩",
+    service:"WhatsApp",
+    price:15000,
+    stock:15
+  },
+
+  {
+    id:40,
+    country:"Nepal",
+    code:"NP",
+    flag:"🇳🇵",
+    service:"WhatsApp",
+    price:15000,
+    stock:10
+  }
+
+];
+
+/*
+====================================================
+ KONFIGURASI
+====================================================
+*/
+
+// GANTI DENGAN NOMOR WHATSAPP TOKO LU.
+// Format: 628xxxxxxxxxx
+const WHATSAPP_NUMBER = "6282122997137";
+
+
+let cart = [];
+
+
+/*
+====================================================
+ FORMAT RUPIAH
+====================================================
+*/
+
+function rupiah(number){
+
+  return new Intl.NumberFormat(
+    "id-ID",
+    {
+      style:"currency",
+      currency:"IDR",
+      maximumFractionDigits:0
+    }
+  ).format(number);
+
+}
+
+
+/*
+====================================================
+ FILTER NEGARA
+====================================================
+*/
+
+function loadCountries(){
+
+  const select =
+    document.getElementById("countryFilter");
+
+  const countries =
+    [...new Set(PRODUCTS.map(p => p.country))];
+
+  countries.forEach(country => {
+
+    const option =
+      document.createElement("option");
+
+    option.value = country;
+    option.textContent = country;
+
+    select.appendChild(option);
+
+  });
+
+}
+
+
+/*
+====================================================
+ RENDER PRODUK
+====================================================
+*/
+
+function renderProducts(){
+
+  const container =
+    document.getElementById("products");
+
+  const search =
+    document
+      .getElementById("search")
+      .value
+      .toLowerCase();
+
+  const country =
+    document
+      .getElementById("countryFilter")
+      .value;
+
+  const filtered =
+    PRODUCTS.filter(product => {
+
+      const matchSearch =
+        product.country.toLowerCase().includes(search) ||
+        product.service.toLowerCase().includes(search);
+
+      const matchCountry =
+        country === "all" ||
+        product.country === country;
+
+      return matchSearch && matchCountry;
+
+    });
+
+
+  container.innerHTML = "";
+
+  document.getElementById("productTotal")
+    .textContent =
+    `${filtered.length} produk`;
+
+  document.getElementById("empty").style.display =
+    filtered.length ? "none" : "block";
+
+
+  filtered.forEach(product => {
+
+    const card =
+      document.createElement("div");
+
+    card.className = "product";
+
+    card.innerHTML = `
+
+      <div class="flag">
+        ${product.flag}
+      </div>
+
+      <h3>${product.country}</h3>
+
+      <div class="service">
+        ${product.service}
+      </div>
+
+      <div class="stock">
+        <span class="dot"></span>
+        ${product.stock} stok tersedia
+      </div>
+
+      <div class="bottom">
+
+        <div class="price">
+          <small>Harga</small>
+          ${rupiah(product.price)}
+        </div>
+
+        <button
+          class="add"
+          onclick="addToCart(${product.id})"
+        >
+          + Tambah
+        </button>
+
+      </div>
+    `;
+
+    container.appendChild(card);
+
+  });
+
+}
+
+
+/*
+====================================================
+ TAMBAH KE KERANJANG
+====================================================
+*/
+
+function addToCart(id){
+
+  const product =
+    PRODUCTS.find(p => p.id === id);
+
+  if(!product) return;
+
+  cart.push(product);
+
+  updateCart();
+
+  // Feedback sederhana
+  const count =
+    document.getElementById("cartCount");
+
+  count.animate(
+    [
+      {transform:"scale(1)"},
+      {transform:"scale(1.35)"},
+      {transform:"scale(1)"}
+    ],
+    {
+      duration:300
+    }
+  );
+
+}
+
+
+/*
+====================================================
+ UPDATE CART
+====================================================
+*/
+
+function updateCart(){
+
+  document.getElementById("cartCount")
+    .textContent = cart.length;
+
+
+  const container =
+    document.getElementById("cartItems");
+
+  if(cart.length === 0){
+
+    container.innerHTML = `
+      <div style="
+        text-align:center;
+        padding:35px 10px;
+        color:#777;
+      ">
+        🛒<br><br>
+        Keranjang masih kosong.
+      </div>
+    `;
+
+  }else{
+
+    container.innerHTML =
+      cart.map((item,index) => `
+
+        <div class="cart-item">
+
+          <div class="cart-item-info">
+
+            <strong>
+              ${item.flag}
+              ${item.country}
+            </strong>
+
+            <small>
+              ${item.service}
+              — ${rupiah(item.price)}
+            </small>
+
+          </div>
+
+          <button
+            class="remove"
+            onclick="removeItem(${index})"
+          >
+            Hapus
+          </button>
+
+        </div>
+
+      `).join("");
+
+  }
+
+
+  const total =
+    cart.reduce(
+      (sum,item) => sum + item.price,
+      0
+    );
+
+  document.getElementById("totalPrice")
+    .textContent = rupiah(total);
+
+}
+
+
+/*
+====================================================
+ HAPUS PRODUK
+====================================================
+*/
+
+function removeItem(index){
+
+  cart.splice(index,1);
+
+  updateCart();
+
+}
+
+
+/*
+====================================================
+ BUKA CART
+====================================================
+*/
+
+function openCart(){
+
+  updateCart();
+
+  document
+    .getElementById("cartOverlay")
+    .classList.add("active");
+
+}
+
+
+/*
+====================================================
+ TUTUP CART
+====================================================
+*/
+
+function closeCart(){
+
+  document
+    .getElementById("cartOverlay")
+    .classList.remove("active");
+
+}
+
+
+/*
+====================================================
+ CHECKOUT WHATSAPP
+====================================================
+*/
+
+function checkout(){
+
+  if(cart.length === 0){
+
+    alert("Keranjang masih kosong.");
+
+    return;
+
+  }
+
+
+  let message =
+    "Halo admin, saya mau order NOKOS.%0A%0A";
+
+
+  cart.forEach((item,index) => {
+
+    message +=
+      `${index + 1}. ${item.flag} ${item.country}%0A`;
+
+    message +=
+      `Layanan: ${item.service}%0A`;
+
+    message +=
+      `Harga: ${rupiah(item.price)}%0A%0A`;
+
+  });
+
+
+  const total =
+    cart.reduce(
+      (sum,item) => sum + item.price,
+      0
+    );
+
+
+  message +=
+    `Total: ${rupiah(total)}%0A%0A`;
+
+  message +=
+    "Mohon diproses. Terima kasih.";
+
+
+  const url =
+    `https://wa.me/${WHATSAPP_NUMBER}?text=${message}`;
+
+
+  window.open(url,"_blank");
+
+}
+
+
+/*
+====================================================
+ CLOSE MODAL KLIK LUAR
+====================================================
+*/
+
+document
+  .getElementById("cartOverlay")
+  .addEventListener("click",function(e){
+
+    if(e.target === this){
+      closeCart();
+    }
+
+  });
+
+
+/*
+====================================================
+ START
+====================================================
+*/
+
+loadCountries();
+
+renderProducts();
+
+updateCart();
+
+</script>
+
+</body>
+</html>
